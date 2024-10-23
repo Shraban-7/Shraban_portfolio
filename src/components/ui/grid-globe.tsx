@@ -3,8 +3,9 @@ import React from "react";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 
-const World = dynamic(() => import("@/components/ui/Globe").then((m) => m.World), {
+const World = dynamic(() => import("@/components/ui/Globe").then((mod) => mod.World), {
   ssr: false,
+  loading: () => <div>Loading...</div>
 });
 
 const GridGlobe = () => {
