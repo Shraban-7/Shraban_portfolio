@@ -3,10 +3,11 @@
 import { useEffect, useRef } from "react";
 import { FaLocationArrow } from "react-icons/fa6";
 import { motion, useAnimation } from "framer-motion";
-import Image from "next/image"; // Use next/image for optimized images
+import Image from "next/image";
+import LegacyImage from "next/legacy/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import bg from "@/public/images/bg.png"; // Ensure this image is correctly imported
+import bg from "@/public/images/bg.png";
 import { projects } from "@/data/index";
 import { PinContainer } from "@/components/ui/Pin";
 
@@ -16,7 +17,6 @@ const RecentProjects = () => {
   const sectionRef = useRef(null);
   const controls = useAnimation();
 
-  // GSAP Scroll Animation Setup
   useEffect(() => {
     let ctx = gsap.context(() => {
       gsap.fromTo(
@@ -37,12 +37,11 @@ const RecentProjects = () => {
       );
     });
 
-    return () => ctx.revert(); // Cleanup GSAP context on unmount
+    return () => ctx.revert();
   }, []);
 
   return (
     <div className="py-20" ref={sectionRef} id="projects">
-      {/* Framer Motion Animated Heading */}
       <motion.h2
         className="text-5xl font-bold text-center mb-16"
         initial={{ opacity: 0, scale: 0.8 }}
@@ -62,13 +61,13 @@ const RecentProjects = () => {
               <div className="relative flex items-center justify-center sm:w-96 w-[80vw] overflow-hidden h-[20vh] lg:h-[30vh] mb-10">
                 <div className="relative w-full h-full overflow-hidden lg:rounded-3xl">
                   {/* Background Image */}
-                  <Image
+                  <LegacyImage
                     src={bg}
                     alt="background image"
                     layout="fill"
                     objectFit="cover"
                     priority
-                    className="absolute top-0 left-0 z-0" // Ensure it covers the entire area
+                    className="absolute top-0 left-0 z-0"
                   />
                 </div>
 
@@ -78,7 +77,7 @@ const RecentProjects = () => {
                   className="z-10 absolute bottom-0"
                   width={500}
                   height={300}
-                  objectFit="contain"
+                  style={{ objectFit: "contain" }}
                 />
               </div>
 
@@ -103,7 +102,7 @@ const RecentProjects = () => {
                         transform: `translateX(-${5 * index + 2}px)`,
                       }}
                     >
-                      <Image
+                      <LegacyImage
                         src={icon}
                         alt={`icon-${index}`}
                         width={24}
